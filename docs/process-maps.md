@@ -1,12 +1,12 @@
-# Breezio Service Hub: Current-State Process
+# Breezio Service Hub: Current and Future State Process
 
-**Version:** 1.0 (current state only)
+**Version:** 1.1
 **Date:** 2026-09-22
 **Author:** Magaly Gonzalez
-**Phase:** Slice 1, Phase 1 (Discovery)
-**Related documents:** `discovery.md`, `stakeholders.md`
+**Phase:** Slice 1, Phases 1 and 2
+**Related documents:** `discovery.md`, `stakeholders.md`, `requirements.md`
 
-The future-state process (§3) and gap analysis (§4) are added in Phase 2.
+Current state (§2) was mapped in Phase 1. Future state (§3) and gap analysis (§4) were added in Phase 2.
 
 ---
 
@@ -178,8 +178,177 @@ the included ones, but they cannot be defended without real data.
 
 ## 3. Future state
 
-_Added in Slice 1, Phase 2._
+### 3.1 Narrative
+
+An employee opens one form and describes what they need. They do not pick a
+team. They get a request ID on screen straight away. Chat messages and walk-ups
+are logged by a coordinator through the same form, on the employee's behalf.
+
+The AI reads the description and suggests a team, a category, a priority, and a
+confidence score, with a one-sentence reason. It also lists any required fields
+the description is missing.
+
+The rules layer then decides where the request goes:
+
+- Sensitive HR categories always go to the HR triage queue.
+- Confident predictions (90% or higher) go straight to the owning team.
+- Likely predictions (70 to 89%) go to the owning team, flagged for a coordinator
+  to check.
+- Uncertain predictions (below 70%) go to the human triage queue.
+
+If information is missing, the requester is asked for exactly those fields and
+the SLA clock pauses. If approval is needed, the manager gets a one-click
+request, and Finance is added above $2,500. Every step is logged with a
+timestamp. Status is visible by request ID, and the dashboard replaces the
+month-end count.
+
+### 3.2 Future-state process map
+
+```mermaid
+flowchart TD
+    subgraph EMP[Employee]
+        A[Submits one form<br/>no team to pick] --> A2[Gets request ID<br/>on screen]
+        W[Adds missing details<br/>from a targeted prompt]
+        V[Checks status by ID<br/>and is notified on change]
+    end
+
+    subgraph SYS[AI and rules layer]
+        B[AI suggests team, category,<br/>priority, confidence, reason] --> B2[AI lists missing<br/>required fields]
+        B2 --> D{Sensitive<br/>HR category?}
+        D -- Yes --> Q1[HR triage queue]
+        D -- No --> E{Confidence}
+        E -- 90% or higher --> R1[Auto-route to<br/>owning team]
+        E -- 70 to 89% --> R2[Route to owning team<br/>flagged for review]
+        E -- Below 70% --> Q2[Human triage queue]
+        F{Required fields<br/>complete?}
+        G{Approval<br/>needed?}
+    end
+
+    subgraph COORD[Request Coordinator]
+        C1[Accepts or corrects<br/>the AI suggestion]
+        C0[Logs chat and walk-ups<br/>on the employee's behalf]
+    end
+
+    subgraph APPR[Approver]
+        H[Manager approves<br/>in one click]
+        H2[Finance approves<br/>if above $2,500]
+    end
+
+    subgraph SPEC[Specialist]
+        M[Works the request<br/>SLA clock running] --> N[Resolves]
+    end
+
+    subgraph DASH[Dashboard]
+        T[Live KPIs by team,<br/>category, and channel]
+    end
+
+    A2 --> B
+    C0 --> B
+    Q1 --> C1
+    Q2 --> C1
+    R2 --> C1
+    C1 --> F
+    R1 --> F
+    F -- No --> W
+    W --> F
+    F -- Yes --> G
+    G -- Yes --> H
+    H -- Above $2,500 --> H2
+    H -- Up to $2,500 --> M
+    H2 --> M
+    G -- No --> M
+    N --> V
+    N -. every event logged .-> T
+```
+
+### 3.3 What changes, step by step
+
+| Current state step | Future state | Why it improves | Delivered by |
+|---|---|---|---|
+| Employee picks one of five channels | One form, with walk-ups and chat logged through it | One front door, nothing untracked | FR-03, FR-04 |
+| No request ID | ID on submission | Requests can be referenced, resends stop creating duplicates | FR-01 |
+| Coordinator reads and forwards every message | AI suggests and the rules route | Coordinators only read uncertain or sensitive requests | FR-10, FR-20 |
+| Misroutes forwarded by email | One-step correction with a logged reroute | Misroutes are fixed once and measured | FR-21, FR-24 |
+| Missing information found by the team, then chased | Missing fields detected at intake and asked for exactly | Work starts with what it needs | FR-12, FR-22 |
+| Approval by email and chasing | One-click approval, reminder after 1 day, Finance above $2,500 | Approvals are tracked, fast, and auditable | FR-30 to FR-34 |
+| "Any update?" emails | Status by ID and notifications | Nobody has to ask | FR-41, FR-42 |
+| Per-team spreadsheets | One lifecycle and one event log | Shared definitions of open, late, and resolved | FR-40, NFR-04 |
+| Month-end count by hand | Live dashboard | Leaders see the month as it happens | FR-50 to FR-57 |
+| Sensitive HR email in a shared inbox | HR-only triage queue | Personal information reaches fewer people | BR-04, NFR-09 |
+
+### 3.4 Modeled future-state effort
+
+These figures model what the process costs **if the KPI targets in
+`discovery.md` §5 are met**. They are targets, not a forecast. The build has to
+prove them.
+
+#### Additional assumptions
+
+| ID | Assumption | Value |
+|---|---|---|
+| MF-01 | Share of requests in sensitive categories (always human triage) | 22% |
+| MF-02 | Coordinator time per request: auto-routed spot check, flagged review, full human triage | 0.5, 2, and 6 minutes |
+| MF-03 | Confidence band mix for non-sensitive requests, base scenario | 60% auto-route, 25% flagged, 15% human triage |
+| MF-04 | Misroute, missing-information, and status inquiry rates | At target: 5%, 10%, 0.15 per request |
+| MF-05 | Approval handling after reminders are automated | 2 minutes per approval |
+| MF-06 | Requests logged on behalf (chat and walk-ups) | 10%, at 3 minutes each |
+| MF-07 | Dashboard review replacing month-end reporting | 1 hour per team per month |
+
+MF-03 is an assumption, not a measurement. The real band mix is only known after
+the Slice 2 labeled evaluation (K9, K10).
+
+#### Base scenario
+
+| Activity | Current hrs per month | Future hrs per month | Saved per year |
+|---|---|---|---|
+| Triage and forwarding | 60 | 26.5 | 402 |
+| Misroute rework | 18 | 5.0 | 156 |
+| Missing-information follow-up | 45 | 15.0 | 360 |
+| Approval chasing | 24 | 4.0 | 240 |
+| Status inquiry handling | 30 | 7.5 | 270 |
+| Logging | 30 | 3.0 | 324 |
+| Reporting | 24 | 4.0 | 240 |
+| **Total** | **231** | **65.0** | **1,992** |
+
+**Modeled annual saving in the base scenario: 1,992 hours, about $89,640 at $45
+per hour.** That is roughly 1.3 full-time roles of triage work reduced to about
+0.4.
+
+#### Sensitivity to the AI band mix
+
+| Scenario | Auto / flagged / human triage | Future hrs per year | Saved per year | Saved at $45 |
+|---|---|---|---|---|
+| Conservative | 40% / 30% / 30% | 864 | 1,908 | $85,860 |
+| Base | 60% / 25% / 15% | 780 | 1,992 | $89,640 |
+| Optimistic | 75% / 15% / 10% | 740 | 2,032 | $91,440 |
+
+**What this shows:** the saving barely moves with the AI band mix. Most of it
+comes from structure: one front door, required fields at intake, tracked
+approvals, and visible status. The AI shortens triage, but hitting the K4, K5,
+and K7 targets matters more than a high auto-route rate. That is a useful
+finding for the sponsor. It also means the project still pays off if the model
+turns out less confident than hoped.
+
+#### Not included
+
+- AI running cost per request. Tracked from Phase 4 (NFR-07).
+- Build and change-management effort.
+- Employee time saved, which remains unpriced, as in §2.4.
+
+---
 
 ## 4. Gap analysis
 
-_Added in Slice 1, Phase 2._
+| Gap | Current capability | Required capability | Requirement |
+|---|---|---|---|
+| No single intake | Five channels, two untracked | One form, with on-behalf logging | FR-03, FR-04 |
+| No request identity | None | Unique ID on creation | FR-01 |
+| No routing logic | Human judgment per email | AI suggestion plus a rules layer with thresholds | FR-10, FR-20, BR-01 to BR-04 |
+| No intake validation | Found by the team, later | Required fields per category, detected at intake | FR-12, FR-22 |
+| No approval workflow | Email threads | Sequenced approvals with audit trail and reminders | FR-30 to FR-34 |
+| No service levels | None | SLA per category, with pause rules | FR-23, BR-06, BR-07 |
+| No shared status model | Per-team spreadsheets | One lifecycle, one event log | FR-40, NFR-04 |
+| No requester visibility | Ask by email | Lookup by ID, and notifications | FR-41, FR-42 |
+| No live reporting | Manual month-end count | Dashboard over SQL views | FR-50 to FR-57, NFR-03 |
+| No sensitive-data control | Shared inbox | HR-only queue and access | BR-04, NFR-09 |
+| No evidence for AI accuracy | Not applicable | Labeled holdout evaluation before auto-routing | FR-70 to FR-72 |

@@ -90,7 +90,7 @@ Business hours are Monday to Friday, 8:00 to 17:00, local time.
 | K8 | Stale open requests | Open requests with no status change in 3 or more business days | Not measurable today, no request IDs exist | 5 or fewer | Green 0 to 5; Yellow 6 to 15; Red over 15 |
 | K9 | Classification quality | Macro F1 of AI category prediction on a hand-labeled holdout set of about 150 requests, plus precision within the auto-route band | Not applicable, measured in Slice 2 | Macro F1 0.85 or more, and auto-route precision 0.95 or more | Green meets both; Yellow F1 0.75 to 0.84; Red F1 under 0.75 |
 | K10 | Confidence band mix | Share of requests in each band: auto-route (90%+), route and flag (70 to 89%), human triage (under 70%) | Not applicable | No target set until measured | Informational |
-| K11 | Triage effort | Coordinator hours per month spent on triage, forwarding, chasing, logging, and reporting | 231 hrs per month (modeled) | Set after the future-state model in Phase 2 | Informational until target set |
+| K11 | Triage effort | Coordinator hours per month spent on triage, forwarding, chasing, logging, and reporting | 231 hrs per month (modeled) | 80 hrs per month or less (future-state model: 65, see `process-maps.md` §3.4) | Green 80 or less; Yellow over 80 to 120; Red over 120 |
 
 ### How baselines are established
 
@@ -143,8 +143,8 @@ Business hours are Monday to Friday, 8:00 to 17:00, local time.
 
 ## 7. Draft request taxonomy (v0.1)
 
-This draft gives the classifier a closed set of labels. It is finalized with the
-team leads in Phase 2. "Sensitive" marks categories likely to contain personal
+**Superseded by taxonomy v1.0 in `requirements.md` §3.** This draft gave the
+classifier a closed set of labels and was finalized with the team leads in Phase 2. "Sensitive" marks categories likely to contain personal
 information, which drives open question Q1.
 
 | Team | Category | Approval likely | Sensitive |
@@ -217,15 +217,17 @@ information, which drives open question Q1.
 
 ## 11. Open questions for the sponsor
 
-| # | Question | Owner | Needed by |
+All seven were closed in Phase 2. Decisions D6 to D12 are in `stakeholders.md` §7.
+
+| # | Question | Owner | Status |
 |---|---|---|---|
-| Q1 | Should sensitive HR categories always go to human triage, regardless of AI confidence? | COO with HR Ops Manager | Phase 2 |
-| Q2 | Who owns the taxonomy, and who approves adding or changing a category? | COO | Phase 2 |
-| Q3 | Will the shared inboxes be retired, or run in parallel with the form? For how long? | COO with team leads | Phase 2 |
-| Q4 | What purchase amount requires Finance approval in addition to the manager? | Finance Manager | Phase 2 |
-| Q5 | Who sets the SLA target for each category? | COO with team leads | Phase 2 |
-| Q6 | May request text be sent to an external AI API, and under what data processing terms? | IT Security and Privacy | Before any real data |
-| Q7 | Are chat messages and walk-ups captured in the new process, or redirected to the form? | Team leads | Phase 2 |
+| Q1 | Should sensitive HR categories always go to human triage, regardless of AI confidence? | COO with HR Ops Manager | Closed by D6 |
+| Q2 | Who owns the taxonomy, and who approves adding or changing a category? | COO | Closed by D7 |
+| Q3 | Will the shared inboxes be retired, or run in parallel with the form? For how long? | COO with team leads | Closed by D8 |
+| Q4 | What purchase amount requires Finance approval in addition to the manager? | Finance Manager | Closed by D9 |
+| Q5 | Who sets the SLA target for each category? | COO with team leads | Closed by D10 |
+| Q6 | May request text be sent to an external AI API, and under what data processing terms? | IT Security and Privacy | Closed by D11 |
+| Q7 | Are chat messages and walk-ups captured in the new process, or redirected to the form? | Team leads | Closed by D12 |
 
 ---
 

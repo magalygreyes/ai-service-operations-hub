@@ -134,6 +134,14 @@ Notes on the RACI:
 ## 7. Decision log
 
 Decisions made at kickoff are recorded in `discovery.md` §10 (D1 to D5).
-Decisions made with stakeholders from Phase 2 onward are added here, starting at D6.
+Decisions made with stakeholders from Phase 2 onward are recorded here.
 
-_No stakeholder decisions recorded yet. First entries expected when Q1 to Q7 close in Phase 2._
+| # | Decision | Made by | Date | Closes | Rationale |
+|---|---|---|---|---|---|
+| D6 | Sensitive HR categories always go to the HR triage queue (Aisha Bello's team), whatever the AI confidence. The AI suggests, but never auto-routes them | Renata Velez with Aisha Bello | 2026-09-22 | Q1 | Personal information reaches the fewest people possible, and trust with HR is protected (SR-03) |
+| D7 | Renata Velez owns the taxonomy. Team leads can request changes. Every change is versioned | Renata Velez | 2026-09-22 | Q2 | One owner stops the AI, the rules, and the dashboard drifting apart (SR-06) |
+| D8 | Shared inboxes run for a 30-day overlap with an auto-reply pointing to the form, then auto-reply only | Renata Velez with team leads | 2026-09-22 | Q3 | Gives employees time to switch without losing requests (SR-01) |
+| D9 | Software and purchase requests above $2,500 need Finance Manager approval on top of the manager's | David Mensah | 2026-09-22 | Q4 | Applies the spend policy the same way every time (SR-07) |
+| D10 | Each team lead proposes the SLA targets for their own categories. The sponsor approves the set | Team leads, approved by Renata Velez | 2026-09-22 | Q5 | Targets come from the people who deliver them |
+| D11 | No real request text goes to an external AI service until Elena Petrova approves the provider and its data terms. Slice 1 uses synthetic data only | Elena Petrova | 2026-09-22 | Q6 | Keeps Security as an independent gate (SR-03) |
+| D12 | Chat messages and walk-ups are logged by a coordinator through the form, on the employee's behalf, with the channel recorded | Renata Velez with team leads | 2026-09-22 | Q7 | Nothing stays untracked, and channel data shows whether adoption is working (SR-01) |

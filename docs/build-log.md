@@ -27,3 +27,26 @@ A dated record of what was built in each phase, what was decided, and what is ne
 - Every pain point maps to a KPI or an open question.
 
 **Next:** Phase 2, requirements and future state.
+
+---
+
+## 2026-09-22. Slice 1, Phase 2: Requirements and future state
+
+**Built**
+
+- `docs/requirements.md`: taxonomy v1.0 (18 categories plus Unclassified) with
+  required fields and SLAs, business rules BR-01 to BR-10, functional
+  requirements FR-01 to FR-72, non-functional requirements NFR-01 to NFR-11.
+- `docs/user-stories.md`: US-01 to US-17 in six epics, with acceptance criteria.
+- `docs/process-maps.md`: future-state narrative and map, step-by-step change
+  table, modeled future-state effort with a three-scenario sensitivity check,
+  gap analysis.
+- `docs/stakeholders.md`: decisions D6 to D12, closing Q1 to Q7.
+- `docs/discovery.md`: open questions closed, K11 target set.
+
+**Finding**
+
+- Modeled saving ranges from 1,908 to 2,032 hours a year across AI band-mix
+  scenarios. Structure drives the value more than the auto-route rate.
+
+**Next:** Phase 3, data model, Supabase schema, and synthetic data generator.

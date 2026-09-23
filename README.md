@@ -4,7 +4,7 @@
 
 `Business Analysis` · `Process Mapping` · `Requirements Engineering` · `PostgreSQL` · `Supabase` · `AI Classification` · `Streamlit`
 
-> **Status:** Slice 1, Phase 1 (Discovery) complete. This case study is built in
+> **Status:** Slice 1, Phase 2 (Requirements and future state) complete. This case study is built in
 > public, one phase at a time. Sections marked _Planned_ fill in as each phase ships.
 
 ---
@@ -55,11 +55,25 @@ no way to measure service levels because none exist.
 
 ## 05. Requirements
 
-_Planned: Phase 2._
+48 requirements (37 functional, 11 non-functional), 10 business rules, and 17 user
+stories with 51 acceptance criteria. Every requirement traces back to a
+business objective, KPI, or pain point. Seven sponsor decisions (D6 to D12)
+closed the open questions, including one hard rule: sensitive HR requests
+always go to a person, whatever the AI's confidence.
+
+Details: [`docs/requirements.md`](docs/requirements.md) and [`docs/user-stories.md`](docs/user-stories.md).
 
 ## 06. Future-state process
 
-_Planned: Phase 2._
+One form, AI classification, a rules layer that always wins, tracked approvals,
+and status by request ID. Modeled at KPI targets, triage effort drops from 231 to
+about 65 hours a month.
+
+**Key finding:** the modeled saving barely changes with the AI auto-route rate
+(1,908 to 2,032 hours a year across three scenarios). Most of the value comes
+from process structure. The AI helps, but the project does not depend on it.
+
+Map, sensitivity table, and gap analysis: [`docs/process-maps.md`](docs/process-maps.md).
 
 ## 07. Solution architecture
 
@@ -105,8 +119,8 @@ _Planned._
 | Slice | Phase | Scope | Status |
 |---|---|---|---|
 | 1 | 1 | Discovery: problem, KPIs, stakeholders, current state | 🟢 Done |
-| 1 | 2 | Requirements, user stories, future state, taxonomy, SLAs | 🟡 Next |
-| 1 | 3 | Data model, Supabase schema, synthetic data generator | 🔴 Not started |
+| 1 | 2 | Requirements, user stories, future state, taxonomy, SLAs | 🟢 Done |
+| 1 | 3 | Data model, Supabase schema, synthetic data generator | 🟡 Next |
 | 1 | 4 | AI classification and business rules | 🔴 Not started |
 | 1 | 5 | SQL KPI queries and Streamlit dashboard, live URL | 🔴 Not started |
 | 1 | 6 | UAT plan, traceability matrix, case study complete | 🔴 Not started |
@@ -120,7 +134,9 @@ _Planned._
 | [`docs/discovery.md`](docs/discovery.md) | Problem statement, objectives BO-01 to BO-07, KPIs K1 to K11, scope, taxonomy draft, open questions |
 | [`docs/stakeholders.md`](docs/stakeholders.md) | Register ST-01 to ST-09, influence grid, engagement, RACI, risks |
 | [`docs/org-chart.md`](docs/org-chart.md) | Breezio org chart, who's who by stakeholder ID, headcount of 300 |
-| [`docs/process-maps.md`](docs/process-maps.md) | Current-state map, pain points PP-01 to PP-11, modeled effort |
+| [`docs/process-maps.md`](docs/process-maps.md) | Current and future state maps, pain points PP-01 to PP-11, modeled effort and sensitivity, gap analysis |
+| [`docs/requirements.md`](docs/requirements.md) | Taxonomy v1.0 with SLAs, business rules BR-01 to BR-10, FR and NFR requirements with traceability |
+| [`docs/user-stories.md`](docs/user-stories.md) | Stories US-01 to US-17 in six epics, with Given, When, Then acceptance criteria |
 | [`docs/build-log.md`](docs/build-log.md) | Dated record of each phase |
 
 ## What this project does not claim
