@@ -4,7 +4,7 @@
 **Date:** 2026-09-22
 **Author:** Magaly Gonzalez
 **Phase:** Slice 1, Phase 1 (Discovery)
-**Related documents:** `discovery.md`, `process-maps.md`
+**Related documents:** `discovery.md`, `process-maps.md`, `org-chart.md`
 
 ---
 
@@ -15,7 +15,8 @@ each party holds over its adoption, and how each one is engaged during the build
 It feeds the prioritization of requirements in Phase 2.
 
 Stakeholders are fictional roles at Breezio, a fictional company. No real
-organization or person is represented.
+organization or person is represented. Names and reporting lines for each
+stakeholder are in `org-chart.md`.
 
 ---
 

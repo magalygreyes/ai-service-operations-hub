@@ -119,6 +119,7 @@ _Planned._
 |---|---|
 | [`docs/discovery.md`](docs/discovery.md) | Problem statement, objectives BO-01 to BO-07, KPIs K1 to K11, scope, taxonomy draft, open questions |
 | [`docs/stakeholders.md`](docs/stakeholders.md) | Register ST-01 to ST-09, influence grid, engagement, RACI, risks |
+| [`docs/org-chart.md`](docs/org-chart.md) | Breezio org chart, who's who by stakeholder ID, headcount of 300 |
 | [`docs/process-maps.md`](docs/process-maps.md) | Current-state map, pain points PP-01 to PP-11, modeled effort |
 | [`docs/build-log.md`](docs/build-log.md) | Dated record of each phase |
 

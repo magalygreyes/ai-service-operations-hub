@@ -16,6 +16,9 @@ A dated record of what was built in each phase, what was decided, and what is ne
   interest grid, engagement strategy, RACI by phase, risks SR-01 to SR-07.
 - `docs/process-maps.md`: current-state narrative and swimlane map, pain points
   PP-01 to PP-11, modeled current-state effort (2,772 hours, about $124,740 a year).
+- `docs/org-chart.md`: fictional Breezio org chart with names and reporting
+  lines for every stakeholder ID, headcount summing to 300, and why the reporting
+  lines shape influence.
 - `README.md`: case study skeleton with the 15-section structure.
 
 **Traceability established**
